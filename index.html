@@ -3,62 +3,239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First Web App</title>
+  <meta name="description" content="Justice's enhanced first web application and HTML learning journal.">
+  <title>Justice | My Enhanced Web App</title>
   <style>
-    :root { --bg:#eaf1ff; --card:#fff; --text:#14213d; --muted:#53627a; --accent:#3157d5; --soft:#f2f5ff; --border:#d9e1f2; }
-    * { box-sizing:border-box; }
-    body { min-height:100vh; margin:0; display:grid; place-items:center; padding:24px; font-family:"Segoe UI",Arial,sans-serif; color:var(--text); background:radial-gradient(circle at 10% 10%,#cbd9ff,transparent 30%),radial-gradient(circle at 90% 90%,#ccefe7,transparent 28%),var(--bg); }
-    main { width:min(680px,100%); padding:clamp(28px,6vw,56px); background:var(--card); border:1px solid var(--border); border-radius:28px; box-shadow:0 24px 60px #223a741f; }
-    .eyebrow { margin:0 0 14px; color:var(--accent); font-size:.78rem; font-weight:800; letter-spacing:.15em; }
-    h1 { margin:0 0 16px; font-size:clamp(2.25rem,7vw,4.2rem); line-height:1; letter-spacing:-.045em; }
-    .intro { margin:0 0 36px; color:var(--muted); font-size:1.08rem; line-height:1.7; }
-    section { padding:24px; background:var(--soft); border:1px solid var(--border); border-radius:18px; }
-    h2 { margin:0 0 18px; font-size:1.25rem; }
-    label { display:block; margin-bottom:8px; font-weight:700; }
-    .row { display:flex; gap:10px; }
-    input,button { min-height:48px; border-radius:11px; font:inherit; }
-    input { min-width:0; flex:1; padding:0 14px; color:var(--text); background:var(--card); border:1px solid var(--border); outline:none; }
-    input:focus { border-color:var(--accent); box-shadow:0 0 0 4px #3157d523; }
-    button { padding:0 18px; color:#fff; background:var(--accent); border:0; font-weight:700; cursor:pointer; }
-    button:hover { background:#2444ad; }
-    #greeting { min-height:28px; margin:18px 0 0; color:var(--accent); font-weight:700; }
-    footer { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-top:24px; color:var(--muted); font-size:.88rem; }
-    #theme { min-height:auto; padding:8px 12px; color:var(--accent); background:transparent; border:1px solid var(--border); }
-    body.dark { --bg:#080d1b; --card:#11192c; --text:#f3f6ff; --muted:#aab5cc; --accent:#83a2ff; --soft:#172138; --border:#293653; }
-    @media(max-width:560px) { .row,footer { align-items:stretch; flex-direction:column; } footer { align-items:flex-start; } }
+    :root {
+      color-scheme: light;
+      --background: #eaf1ff;
+      --card: #ffffff;
+      --text: #14213d;
+      --muted: #53627a;
+      --accent: #3157d5;
+      --accent-dark: #2444ad;
+      --soft: #f2f5ff;
+      --border: #d9e1f2;
+      --success: #14745a;
+      --shadow: 0 24px 60px rgba(34, 58, 116, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 20px;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(80, 127, 255, 0.24), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(88, 207, 180, 0.22), transparent 28%),
+        var(--background);
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    .page {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px clamp(24px, 6vw, 58px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand { color: var(--text); font-size: 1rem; font-weight: 800; text-decoration: none; }
+    nav { display: flex; gap: 18px; }
+    nav a { color: var(--muted); font-size: 0.92rem; font-weight: 650; text-decoration: none; }
+    nav a:hover { color: var(--accent); }
+
+    main { padding: clamp(34px, 7vw, 64px); }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 760px; margin-bottom: 18px; font-size: clamp(2.5rem, 7vw, 4.7rem); line-height: 1; letter-spacing: -0.045em; }
+    h2 { margin-bottom: 20px; font-size: clamp(1.65rem, 4vw, 2.25rem); letter-spacing: -0.025em; }
+    h3 { margin-bottom: 10px; font-size: 1.08rem; }
+    p { color: var(--muted); line-height: 1.7; }
+
+    .introduction { max-width: 670px; margin-bottom: 34px; font-size: 1.08rem; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 44px; }
+    .tag-row span { padding: 7px 11px; color: var(--accent); background: var(--soft); border: 1px solid var(--border); border-radius: 999px; font-size: 0.82rem; font-weight: 750; }
+
+    section { scroll-margin-top: 20px; }
+    .activity { padding: 26px; background: var(--soft); border: 1px solid var(--border); border-radius: 20px; }
+    label { display: block; margin-bottom: 8px; font-size: 0.92rem; font-weight: 700; }
+    .input-row { display: flex; gap: 10px; }
+    input, button { min-height: 48px; border-radius: 11px; font: inherit; }
+    input { min-width: 0; flex: 1; padding: 0 14px; color: var(--text); background: var(--card); border: 1px solid var(--border); outline: none; }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(49, 87, 213, 0.14); }
+    button { padding: 0 18px; color: #ffffff; background: var(--accent); border: 0; font-weight: 750; cursor: pointer; }
+    button:hover { background: var(--accent-dark); }
+    .greeting { min-height: 28px; margin: 18px 0 0; color: var(--accent); font-weight: 750; }
+
+    hr { margin: 50px 0; border: 0; border-top: 1px solid var(--border); }
+    .learning-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    article { padding: 22px; background: var(--soft); border: 1px solid var(--border); border-radius: 17px; }
+    article p { margin-bottom: 0; }
+    article .number { display: inline-grid; width: 32px; height: 32px; margin-bottom: 16px; place-items: center; color: #ffffff; background: var(--accent); border-radius: 9px; font-size: 0.85rem; font-weight: 800; }
+
+    .elements { margin-top: 26px; padding: 24px; border: 1px solid var(--border); border-radius: 17px; }
+    .elements ul { margin: 12px 0 0; padding-left: 22px; color: var(--muted); line-height: 1.9; }
+    .elements strong { color: var(--text); }
+    .resource-link { display: inline-block; margin-top: 18px; color: var(--accent); font-weight: 750; }
+
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px clamp(24px, 6vw, 58px); color: var(--muted); background: var(--soft); border-top: 1px solid var(--border); font-size: 0.88rem; }
+    .theme-button { min-height: auto; padding: 8px 12px; color: var(--accent); background: var(--card); border: 1px solid var(--border); }
+
+    body.dark {
+      color-scheme: dark;
+      --background: #080d1b;
+      --card: #11192c;
+      --text: #f3f6ff;
+      --muted: #aab5cc;
+      --accent: #83a2ff;
+      --accent-dark: #6689f2;
+      --soft: #172138;
+      --border: #293653;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+    }
+
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .learning-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .page { border-radius: 20px; }
+      .input-row, footer { align-items: stretch; flex-direction: column; }
+      footer { align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <p class="eyebrow">MY FIRST WEB APP</p>
-    <h1>Hello, I’m Justice.</h1>
-    <p class="intro">I created this page in Visual Studio Code while learning the basics of HTML, CSS and JavaScript.</p>
-    <section>
-      <h2>Try the greeting generator</h2>
-      <label for="name">What is your name?</label>
-      <div class="row">
-        <input id="name" type="text" placeholder="Enter your name" maxlength="40">
-        <button id="greet" type="button">Say hello</button>
+  <div class="page">
+    <header>
+      <a class="brand" href="#top">Justice’s Web App</a>
+      <nav aria-label="Main navigation">
+        <a href="#greeting-tool">Greeting tool</a>
+        <a href="#learning">What I learned</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <p class="eyebrow">MY ENHANCED WEB APP</p>
+      <h1>Hello, I’m Justice.</h1>
+      <p class="introduction">
+        I created and enhanced this page in Visual Studio Code while learning how
+        <strong>HTML structures content</strong>, CSS controls presentation and JavaScript adds interaction.
+      </p>
+
+      <div class="tag-row" aria-label="Technologies used">
+        <span>HTML structure</span>
+        <span>CSS styling</span>
+        <span>JavaScript interaction</span>
       </div>
-      <p id="greeting" aria-live="polite">Your greeting will appear here.</p>
-    </section>
+
+      <section id="greeting-tool" class="activity" aria-labelledby="activity-title">
+        <h2 id="activity-title">Try the greeting generator</h2>
+        <p>Enter your name to create a personalised welcome message.</p>
+        <label for="visitor-name">What is your name?</label>
+        <div class="input-row">
+          <input id="visitor-name" type="text" placeholder="Enter your name" maxlength="40">
+          <button id="greet-button" type="button">Say hello</button>
+        </div>
+        <p id="greeting" class="greeting" aria-live="polite">Your greeting will appear here.</p>
+      </section>
+
+      <hr>
+
+      <section id="learning" aria-labelledby="learning-title">
+        <p class="eyebrow">WEEKLY LEARNING</p>
+        <h2 id="learning-title">What I learned about HTML</h2>
+
+        <div class="learning-grid">
+          <article>
+            <span class="number">01</span>
+            <h3>Purpose of HTML</h3>
+            <p>HTML describes the structure of a web page and tells the browser how different pieces of content are organised.</p>
+          </article>
+          <article>
+            <span class="number">02</span>
+            <h3>Applying the knowledge</h3>
+            <p>I can use headings, paragraphs, links and other elements to build a clear page for my assessment.</p>
+          </article>
+          <article>
+            <span class="number">03</span>
+            <h3>My next step</h3>
+            <p>I want to understand more about choosing semantic elements and making web pages accessible to different users.</p>
+          </article>
+        </div>
+
+        <div class="elements">
+          <h3>HTML elements used in this update</h3>
+          <ul>
+            <li><strong>Headings</strong> organise the page into clear sections.</li>
+            <li><strong>Paragraphs</strong> present information in readable blocks.</li>
+            <li><strong>Links</strong> connect visitors to another page or resource.</li>
+            <li><strong>Lists</strong> group related information.</li>
+          </ul>
+          <a class="resource-link" href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Continue learning with W3Schools →</a>
+        </div>
+      </section>
+    </main>
+
     <footer>
       <span>Built with HTML, CSS and JavaScript</span>
-      <button id="theme" type="button">Use dark mode</button>
+      <button id="theme-button" class="theme-button" type="button" aria-pressed="false">Use dark mode</button>
     </footer>
-  </main>
+  </div>
+
   <script>
-    const nameInput=document.querySelector('#name');
-    const greeting=document.querySelector('#greeting');
-    document.querySelector('#greet').addEventListener('click',()=>{
-      const name=nameInput.value.trim();
-      greeting.textContent=name ? `Hello, ${name}! Welcome to my first web app.` : 'Please enter your name first.';
-      if(!name) nameInput.focus();
+    const nameInput = document.querySelector("#visitor-name");
+    const greetButton = document.querySelector("#greet-button");
+    const greeting = document.querySelector("#greeting");
+    const themeButton = document.querySelector("#theme-button");
+
+    function showGreeting() {
+      const name = nameInput.value.trim();
+      if (name === "") {
+        greeting.textContent = "Please enter your name first.";
+        nameInput.focus();
+        return;
+      }
+      greeting.textContent = `Hello, ${name}! Welcome to my enhanced web app.`;
+    }
+
+    greetButton.addEventListener("click", showGreeting);
+    nameInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") showGreeting();
     });
-    nameInput.addEventListener('keydown',event=>{ if(event.key==='Enter') document.querySelector('#greet').click(); });
-    document.querySelector('#theme').addEventListener('click',event=>{
-      const dark=document.body.classList.toggle('dark');
-      event.currentTarget.textContent=dark ? 'Use light mode' : 'Use dark mode';
+
+    themeButton.addEventListener("click", () => {
+      const darkModeIsOn = document.body.classList.toggle("dark");
+      themeButton.textContent = darkModeIsOn ? "Use light mode" : "Use dark mode";
+      themeButton.setAttribute("aria-pressed", String(darkModeIsOn));
     });
   </script>
 </body>
