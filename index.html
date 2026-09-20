@@ -142,19 +142,101 @@
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
     }
 
-    @media (max-width: 760px) {
-      header { align-items: flex-start; flex-direction: column; }
-      .learning-grid { grid-template-columns: 1fr; }
-      .interest { grid-template-columns: 1fr; }
-    }
+@media (max-width: 760px) {
+  body {
+    padding: 16px;
+  }
 
-    @media (max-width: 560px) {
-      body { padding: 12px; }
-      .page { border-radius: 20px; }
-      .input-row, footer { align-items: stretch; flex-direction: column; }
-      footer { align-items: flex-start; }
-    }
-  </style>
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px 24px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  main {
+    padding: 36px 24px;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .learning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interest {
+    grid-template-columns: 1fr;
+  }
+
+  .interest img {
+    width: 100%;
+    height: auto;
+    max-height: 340px;
+    object-fit: cover;
+  }
+
+  footer {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 10px;
+  }
+
+  .page {
+    border-radius: 18px;
+  }
+
+  header,
+  main,
+  footer {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  nav {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    text-align: left !important;
+    letter-spacing: -1px !important;
+  }
+
+  .introduction {
+    font-size: 1rem !important;
+  }
+
+  .activity,
+  .elements,
+  .interest,
+  article {
+    padding: 18px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row button {
+    width: 100%;
+  }
+
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}  </style>
 </head>
 <body>
   <div class="page">
@@ -183,20 +265,29 @@
         <span>JavaScript interaction</span>
       </div>
 
-      <section id="greeting-tool" class="activity" aria-labelledby="activity-title"
-  style="border-width: 2px; padding: 30px;">
-        <h2 id="activity-title">Try the greeting generator</h2>
-        <p>Enter your name to create a personalised welcome message.</p>
-        <label for="visitor-name">What is your name?</label>
-        <div class="input-row">
-          <input id="visitor-name" type="text" placeholder="Enter your name" maxlength="40">
-          <button id="greet-button" type="button">Say hello</button>
-        </div>
-        <p id="greeting" class="greeting" aria-live="polite">Your greeting will appear here.</p>
-      </section>
 
-      <hr>
+<section id="greeting-tool" class="activity" aria-labelledby="activity-title">
+  <h2 id="activity-title">Try the greeting generator</h2>
+  <p>Enter your name to create a personalised welcome message.</p>
 
+  <label for="visitor-name">What is your name?</label>
+
+  <div class="input-row">
+    <input
+      id="visitor-name"
+      type="text"
+      placeholder="Enter your name"
+      maxlength="40"
+    >
+    <button id="greet-button" type="button">Say hello</button>
+  </div>
+
+  <p id="greeting" class="greeting" aria-live="polite">
+    Your greeting will appear here.
+  </p>
+</section>
+
+<hr>
       <section id="learning" aria-labelledby="learning-title">
         <p class="eyebrow">WEEKLY LEARNING</p>
         <h2 id="learning-title">What I learned about HTML</h2>
