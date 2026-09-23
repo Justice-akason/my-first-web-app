@@ -141,7 +141,58 @@
       --border: #293653;
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
     }
+form {
+  display: grid;
+  gap: 14px;
+}
 
+form input[type="text"],
+form input[type="email"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  font: inherit;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form fieldset {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+form legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+form fieldset label,
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+form input[type="radio"],
+form input[type="checkbox"] {
+  flex: none;
+  width: auto;
+  min-height: auto;
+  margin: 0;
+}
+
+form button[type="submit"] {
+  width: fit-content;
+}
 @media (max-width: 760px) {
   body {
     padding: 16px;
@@ -343,6 +394,70 @@
           </div>
         </article>
       </section>
+    <hr>
+
+<section class="activity" id="feedback-form" aria-labelledby="feedback-title">
+  <h2 id="feedback-title">Learning feedback</h2>
+  <p>Complete this form to share your interest in web development.</p>
+
+  <form id="learning-form">
+    <label for="full-name">Name</label>
+    <input
+      id="full-name"
+      name="full-name"
+      type="text"
+      placeholder="Enter your name"
+      required
+    >
+
+    <label for="email">Email address</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      placeholder="Enter your email"
+      required
+    >
+
+    <label for="topic">Which topic interests you most?</label>
+    <select id="topic" name="topic">
+      <option value="">Choose a topic</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="javascript">JavaScript</option>
+      <option value="accessibility">Web accessibility</option>
+    </select>
+
+    <fieldset>
+      <legend>How would you describe your experience?</legend>
+
+      <label>
+        <input type="radio" name="experience" value="beginner">
+        Beginner
+      </label>
+
+      <label>
+        <input type="radio" name="experience" value="intermediate">
+        Intermediate
+      </label>
+    </fieldset>
+
+    <label for="comments">Comments</label>
+    <textarea
+      id="comments"
+      name="comments"
+      rows="5"
+      placeholder="Write your comments here"
+    ></textarea>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="updates">
+      I would like to receive learning updates
+    </label>
+
+    <button type="submit">Submit feedback</button>
+  </form>
+</section>
     </main>
 
     <footer>
