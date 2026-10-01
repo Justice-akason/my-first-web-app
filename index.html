@@ -287,7 +287,20 @@ form button[type="submit"] {
     align-items: flex-start;
     flex-direction: column;
   }
-}  </style>
+} #learning-list {
+  margin-top: 20px;
+  padding-left: 24px;
+  line-height: 1.8;
+}
+
+#change-style {
+  margin-top: 16px;
+}
+
+.dom-highlight {
+  background-color: #fff4cc;
+  border: 2px solid #3157d5;
+} </style>
 </head>
 <body>
   <div class="page">
@@ -456,6 +469,7 @@ form button[type="submit"] {
     </label>
 
     <button type="submit">Submit feedback</button>
+    <p id="form-message" class="greeting" aria-live="polite"></p>
   </form>
 </section>
     </main>
@@ -464,9 +478,59 @@ form button[type="submit"] {
       <span>Built with HTML, CSS and JavaScript</span>
       <button id="theme-button" class="theme-button" type="button" aria-pressed="false">Use dark mode</button>
     </footer>
+
+  <section class="activity" id="dom-activity">
+  <h2 id="dom-title">My learning tracker</h2>
+  <p id="dom-message">
+    Enter something you learned about web development.
+  </p>
+
+  <label for="learning-input">What did you learn?</label>
+
+  <div class="input-row">
+    <input
+      id="learning-input"
+      type="text"
+      placeholder="For example: How the DOM works"
+    >
+    <button id="add-learning" type="button">Add learning</button>
   </div>
 
+  <ul id="learning-list"></ul>
+
+  <button id="change-style" type="button">
+    Change section style
+  </button>
+  </section>
+</div>
+
   <script>
+    const learningInput = document.getElementById("learning-input");
+const addLearningButton = document.getElementById("add-learning");
+const learningList = document.getElementById("learning-list");
+const domMessage = document.getElementById("dom-message");
+const styleButton = document.getElementById("change-style");
+const domSection = document.getElementById("dom-activity");
+
+addLearningButton.addEventListener("click", function () {
+  const learningText = learningInput.value.trim();
+
+  if (learningText === "") {
+    domMessage.textContent = "Please enter something first.";
+    return;
+  }
+
+  const newItem = document.createElement("li");
+  newItem.textContent = learningText;
+  learningList.appendChild(newItem);
+
+  domMessage.textContent = "Your learning point was added.";
+  learningInput.value = "";
+});
+
+styleButton.addEventListener("click", function () {
+  domSection.classList.toggle("dom-highlight");
+});
     const nameInput = document.querySelector("#visitor-name");
     const greetButton = document.querySelector("#greet-button");
     const greeting = document.querySelector("#greeting");
@@ -492,6 +556,30 @@ form button[type="submit"] {
       themeButton.textContent = darkModeIsOn ? "Use light mode" : "Use dark mode";
       themeButton.setAttribute("aria-pressed", String(darkModeIsOn));
     });
+  const learningForm = document.querySelector("#learning-form");
+const formMessage = document.querySelector("#form-message");
+
+learningForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const fullName = document.querySelector("#full-name").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  const topic = document.querySelector("#topic").value;
+  const experience = document.querySelector(
+    'input[name="experience"]:checked'
+  );
+
+  if (fullName === "" || email === "" || topic === "" || !experience) {
+    formMessage.textContent =
+      "Please complete your name, email, topic and experience level.";
+    return;
+  }
+
+  formMessage.textContent =
+    `Thank you, ${fullName}! You selected ${topic} and described yourself as ${experience.value}.`;
+
+  learningForm.reset();
+});  
   </script>
 </body>
 </html>
