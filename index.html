@@ -581,5 +581,40 @@ learningForm.addEventListener("submit", (event) => {
   learningForm.reset();
 });  
   </script>
+  <section class="activity" id="joke-generator">
+  <h2>Random Joke Generator</h2>
+  <p>Click the button to receive a random joke from an API.</p>
+
+  <button id="joke-button" type="button">Get a joke</button>
+
+  <p id="joke-result" aria-live="polite">
+    Your joke will appear here.
+  </p>
+</section>
+
+<script>
+  const jokeButton = document.getElementById("joke-button");
+  const jokeResult = document.getElementById("joke-result");
+
+  jokeButton.addEventListener("click", async function () {
+    jokeResult.textContent = "Loading a joke...";
+
+    try {
+      const response = await fetch(
+        "https://v2.jokeapi.dev/joke/Programming,Misc,Pun?safe-mode&type=single"
+      );
+
+      if (!response.ok) {
+        throw new Error("The API request failed.");
+      }
+
+      const data = await response.json();
+      jokeResult.textContent = data.joke;
+    } catch (error) {
+      jokeResult.textContent =
+        "Sorry, the joke could not be loaded. Please try again.";
+    }
+  });
+</script>
 </body>
 </html>
