@@ -581,6 +581,8 @@ learningForm.addEventListener("submit", (event) => {
   learningForm.reset();
 });  
   </script>
+  <button id="toggle-jokes" type="button">Hide joke generator</button>
+
   <section class="activity" id="joke-generator">
   <h2>Random Joke Generator</h2>
   <p>Click the button to receive a random joke from an API.</p>
@@ -616,5 +618,21 @@ learningForm.addEventListener("submit", (event) => {
     }
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#toggle-jokes").click(function () {
+      $("#joke-generator").slideToggle(500, function () {
+        const isVisible = $(this).is(":visible");
+
+        $("#toggle-jokes").text(
+          isVisible ? "Hide joke generator" : "Show joke generator"
+        );
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
